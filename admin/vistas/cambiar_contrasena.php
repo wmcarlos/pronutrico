@@ -18,7 +18,7 @@
       <img src="img/banner.png" style='width:100%;'/>
     <div id="contenido">
 		<!--Contenido derecho-->
-        <div id="derecho">
+        <div id="derecho" style="width:98%;">
          <span id="fecha">Domingo, 10 de Noviembre del 2012</span>
   				<p class="parrafo">
   					<div class="cuadro">
@@ -28,7 +28,7 @@
                           <form name="fentrar" action="../controladores/corTusuario.php" method="post">
                             <tr>
                                 <td>Nueva Contrase&ntilde;a</td>
-                                  <td> <input type="text" name="txtnueva_contra" size="15" /></td>
+                                  <td> <input type="password" name="txtnueva_contra" size="15" /></td>
                               </tr>
                                <tr>
                   <td colspan="2" align="center"><a href="../index.php">Volver</a>  <input type="submit" name="btn_entrar" value="Responder" /><input type="hidden" name="txtoperacion" value="ingresar" /></td>

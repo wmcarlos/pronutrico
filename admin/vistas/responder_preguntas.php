@@ -20,7 +20,7 @@ session_start();
    <!--Contenedor del Contenido Central-->
    <div id="contenido">
 		<!--Contenido derecho-->
-        <div id="derecho">
+        <div id="derecho" style="width: 98%;">
         <span id="fecha">Domingo, 10 de Noviembre del 2012</span>
 				<p class="parrafo">
 					<div class="cuadro">
