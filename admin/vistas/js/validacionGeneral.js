@@ -94,8 +94,8 @@ function addreception(){
 	var codproducto = document.getElementById("txtproducto").value;
 	var textproducto = document.getElementById("txtproducto").options[document.getElementById("txtproducto").selectedIndex].text;
 	var cantidad = document.getElementById("txtcantidad").value;
-
-	var string = "";
+	if(document.getElementById("txttransporte").value && document.getElementById("txtchofer") && document.getElementById("txtplaca").value && document.getElementById("txtproducto").value){
+		var string = "";
 		string+="<tr>";
 			string+="<td><input type='hidden' name='transporte[]' value='"+codtrans+"'>"+texttrans+"</td>";
 			string+="<td><input type='hidden' name='chofer[]' value='"+cedchofer+"'>"+textchofer+"</td>";
@@ -104,18 +104,24 @@ function addreception(){
 			string+="<td><input type='hidden' name='cantidad[]' value='"+cantidad+"'>"+cantidad+"</td>";
 			string+="<td><button type='button' onclick='delreception(this)'>x</button></td>";
 		string+="</tr>";
-	content.innerHTML+=string;
+		content.innerHTML+=string;
 
-	document.getElementById("txttransporte").value = '';
-	document.getElementById("txtchofer").value = '';
-	document.getElementById("txtplaca").value = '';
-	document.getElementById("txtproducto").value = '';
-	document.getElementById("txtcantidad").value = '';
-
+		document.getElementById("txttransporte").value = '';
+		document.getElementById("txtchofer").value = '';
+		document.getElementById("txtplaca").value = '';
+		document.getElementById("txtproducto").value = '';
+		document.getElementById("txtcantidad").value = '';
+	}else{
+		alert("Todos los Campos son Obligatorios");
+	}
+	
 }
 
 $(function() {
 	$( ".fecha_formateada" ).datepicker({
-		dateFormat : 'dd/mm/yy'
+		dateFormat : 'dd/mm/yy',
+		changeYear : true,
+		changeMonth : true,
+		maxDate : '@maxDate'
 	});
 });

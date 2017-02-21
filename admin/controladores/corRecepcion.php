@@ -28,6 +28,7 @@ switch($lcOperacion){
 			$total = count($transporte);
 			for($i=0;$i<$total;$i++){
 				$lobjRecepcion->incluir_recepcion($transporte[$i],$chofer[$i],$placa[$i],$producto[$i],$cantidad[$i]);
+				$lobjRecepcion->addexistencia($producto[$i], $cantidad[$i]);
 			}
 		}
 	break;
@@ -47,13 +48,14 @@ $lcCodigo_origen=$lobjRecepcion->acCodigo_origen;
 	break;
 	
 	case "modificar":
-	
-		if($lobjRecepcion->modificar($lcVarTem)>=1){
-		$lcListo = 1;
-		}else{
-		$lcListo = 0;
+		$lobjRecepcion->modificar($lcVarTem);
+		$lobjRecepcion->deldetails();
+		$total = count($transporte);
+		for($i=0;$i<$total;$i++){
+			$lobjRecepcion->incluir_recepcion($transporte[$i],$chofer[$i],$placa[$i],$producto[$i],$cantidad[$i]);
+			$lobjRecepcion->addexistencia($producto[$i], $cantidad[$i]);
 		}
-	
+		$lcListo = 1;
 	break;
 	
 	case "eliminar":

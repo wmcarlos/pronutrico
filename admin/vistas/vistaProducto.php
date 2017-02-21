@@ -70,7 +70,7 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Existencia:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtexistencia' value='<?php print($lcExistencia);?>' id='txtexistencia' class='validate[required],min[1]'/></td>
+<td><input type='text' disabled='disabled' maxlength='' name='txtexistencia' value='<?php print($lcExistencia);?>' readOnly="readOnly" id='txtexistencia' class='validate[min[1]]'/></td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>

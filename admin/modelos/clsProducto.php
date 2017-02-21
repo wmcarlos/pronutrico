@@ -46,6 +46,24 @@ $llEnc=true;
 return $llEnc;
 }
 
+public function listar()
+{
+	$cad = "";
+$this->ejecutar("select * from producto order by nombre");
+while($laRow=$this->arreglo())
+{		
+	$cad.="<tr>";
+		$cad.="<td>".$laRow['codigo_producto']."</td>";
+		$cad.="<td>".$laRow['nombre']."</td>";
+		$cad.="<td>".$laRow['descripcion']."</td>";
+		$cad.="<td>".$laRow['cantidad_minima']."</td>";
+		$cad.="<td>".$laRow['cantidad_maxima']."</td>";
+		$cad.="<td>".$laRow['existencia']."</td>";
+	$cad.="</tr>";
+}
+return $cad;
+}
+
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {
