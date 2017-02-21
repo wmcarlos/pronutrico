@@ -46,14 +46,52 @@ function cargar()
 <td><input type='text' disabled='disabled' maxlength='' name='txtnro_recepcion' value='<?php print($lcNro_recepcion);?>' id='txtnro_recepcion' class='validate[required],custom[integer]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Fechca:</td>
+<td align='right'><span class='rojo'>*</span> Fecha:</td>
 <td><input type='text' disabled='disabled' name='txtfecha_recepcion' value='<?php print($lcFecha_recepcion);?>' id='txtfecha_recepcion' class='validate[required] fecha_formateada'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Origen:</td>
-<td><select name='txtcodigo_origen' disabled='disabled' id='txtcodigo_origen' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td><select name='txtcodigo_origen' disabled='disabled' id='txtcodigo_origen' class='validate[required]'><option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo('origen','codigo','nombre',$lcCodigo_origen); ?>
+</select></td>
 </tr>
+</table>
+<h1>Detalle de Recepcion</h1>
+<table border='1' class='datos' align='center'>
+<tr>
+	<td>Transporte</td>
+	<td>Chofer</td>
+	<td>Placa</td>
+	<td>Producto</td>
+	<td>Cantidad</td>
+	<td>-</td>
+</tr>
+<tr>
+	<td>
+	<select name="txttransporte" disabled="disabled" id="txttransporte">
+		<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo('transporte','codigo','nombre',null); ?>
+	</select>
+	</td>
+	<td>
+		<select name="txtchofer" disabled="disabled" id="txtchofer">
+			<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo('chofer','cedula',"CONCAT(nombres,' ',apellidos)",$lcCodigo_origen); ?>
 
+		</select>
+	</td>
+	<td><input type="text" size="3" disabled="disabled" name="txtplaca" id="txtplaca"/></td>
+	<td><select name="txtproducto" id="txtproducto">
+		<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo('producto','codigo_producto','nombre',null); ?>
+
+	</select></td>
+	<td><input type="text" size="3" disabled="disabled" name="txtcantidad" id="txtcantidad"/></td>
+	<td><button type="button" name="btnadd" onclick="addreception();" id="btnadd">+</button></td>
+</tr>
+<tbody id="detail_content">
+	<?php print $cad; ?>
+</tbody>
 <input type='hidden' name='txtoperacion' value='des'>
 <input type='hidden' name='txtvar_tem' value='<?php print($lcNro_recepcion); ?>'>
 </table>

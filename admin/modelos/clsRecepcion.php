@@ -23,7 +23,7 @@ public function __destruct() { }
 public function buscar()
 {
 $llEnc=false;
-$this->ejecutar("select * from recepcion where(nro_recepcion = '$this->acNro_recepcion')");
+$this->ejecutar("select *, date_format(fecha_recepcion, '%d/%m/%Y') as fecha_recepcion from recepcion where(nro_recepcion = '$this->acNro_recepcion')");
 if($laRow=$this->arreglo())
 {		
 $this->acNro_recepcion=$laRow['nro_recepcion'];
@@ -66,7 +66,42 @@ return $inicio.$llEnc.$final;
 //funcion inlcuir
 public function incluir()
 {
+$fecha = explode("/", $this->acFecha_recepcion);
+$this->acFecha_recepcion = $fecha[2]."/".$fecha[1]."/".$fecha[0];
 return $this->ejecutar("insert into recepcion(nro_recepcion,fecha_recepcion,codigo_origen)values('$this->acNro_recepcion','$this->acFecha_recepcion','$this->acCodigo_origen')");
+}
+
+function getcolumn($gc,$tb,$fr,$vl){
+	$get = null;
+	$this->ejecutar("select $gc from $tb where $fr = $vl");
+	if($laRow=$this->arreglo()){
+		$get = $laRow[$gc];
+	}
+	return $get;
+}
+
+public function listar(){
+	$cad="";
+	print 
+	$this->ejecutar("select * from linea_recepcion where nro_recepcion = $this->acNro_recepcion");
+	while($laRow=$this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td><input type='hidden' name='transporte[]' value='".$laRow["codigo_transporte"]."'>".$this->getcolumn('nombre','transporte','codigo',$laRow["codigo_transporte"])."</td>";
+			$cad.="<td><input type='hidden' name='chofer[]' value='".$laRow["cedula_chofer"]."'>".$this->getcolumn('CONCAT(nombres," ",apellidos)','chofer','cedula',$laRow["cedula_chofer"])."</td>";
+			$cad.="<td><input type='hidden' name='placa[]' value='".$laRow["placa"]."'>".$laRow["placa"]."</td>";
+			$cad.="<td><input type='hidden' name='producto[]' value='".$laRow["codigo_producto"]."'>".$laRow["codigo_producto"]."</td>";
+			$cad.="<td><input type='hidden' name='cantidad[]' value='".$laRow["cantidad"]."'>".$laRow["cantidad"]."</td>";
+			$cad.="<td><button type='button' onclick='delreception(this)'>x</button></td>";
+		$cad.="</tr>";
+	}
+	return $cad;
+}
+
+public function incluir_recepcion($ct,$cc,$pl,$cp,$ca)
+{
+return $this->ejecutar("insert into 
+	linea_recepcion(nro_recepcion,codigo_transporte,cedula_chofer,placa,codigo_producto,cantidad)
+	values($this->acNro_recepcion,'$ct','$cc','$pl','$cp','$ca')");
 }
         
 

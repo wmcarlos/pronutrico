@@ -76,38 +76,42 @@ function cargar_select(operacion,listo)
 			}
 }
 
-//Funcion para Agregar Detalles no Importa Cuantos Sean
-function add_column(e,id){
-	var table = document.getElementById(id);
-	var tr = document.createElement("tr");
-	var data_array = e.getAttribute("rel").split(",");
-	var total_data = data_array.length;
-	var cadena = "";
-	var value;
-	var selected;
-	for(var i=0;i<total_data;i++){
-		if(document.getElementById(data_array[i]).getAttribute("is_select")=="si"){
-			selected = document.getElementById(data_array[i]).options[document.getElementById(data_array[i]).selectedIndex].text;
-			value = document.getElementById(data_array[i]).value;
-			cadena = cadena+"<td><input type='hidden' name='"+data_array[i]+"[]' value='"+value+"'/>"+selected+"</td>";
-			document.getElementById(data_array[i]).value = "-";
-		}else{
-			value = document.getElementById(data_array[i]).value;
-			cadena = cadena+"<td><input type='hidden' name='"+data_array[i]+"[]' value='"+value+"'/>"+value+"</td>";
-			document.getElementById(data_array[i]).value = "";
-		}
-	}
-	tr.innerHTML = cadena+"<td><input type='button' value='X' rel='"+id+"' onclick='del_column(this)'/></td>";
-	table.appendChild(tr);
-}
+function delreception(e){
 
-//Eliminar una tupla de tabla sin importar su tamano
-function del_column(e){
-	
-	var table = document.getElementById(e.getAttribute("rel"));
 	var td = e.parentNode;
 	var tr = td.parentNode;
-		table.removeChild(tr);
+	var tbody = tr.parentNode;
+	tbody.removeChild(tr);
+}
+
+function addreception(){
+	var content = document.getElementById("detail_content");
+	var codtrans = document.getElementById("txttransporte").value;
+	var texttrans = document.getElementById("txttransporte").options[document.getElementById("txttransporte").selectedIndex].text;
+	var cedchofer = document.getElementById("txtchofer").value;
+	var textchofer = document.getElementById("txtchofer").options[document.getElementById("txttransporte").selectedIndex].text;
+	var placa = document.getElementById("txtplaca").value;
+	var codproducto = document.getElementById("txtproducto").value;
+	var textproducto = document.getElementById("txtproducto").options[document.getElementById("txtproducto").selectedIndex].text;
+	var cantidad = document.getElementById("txtcantidad").value;
+
+	var string = "";
+		string+="<tr>";
+			string+="<td><input type='hidden' name='transporte[]' value='"+codtrans+"'>"+texttrans+"</td>";
+			string+="<td><input type='hidden' name='chofer[]' value='"+cedchofer+"'>"+textchofer+"</td>";
+			string+="<td><input type='hidden' name='placa[]' value='"+placa+"'>"+placa+"</td>";
+			string+="<td><input type='hidden' name='producto[]' value='"+codproducto+"'>"+textproducto+"</td>";
+			string+="<td><input type='hidden' name='cantidad[]' value='"+cantidad+"'>"+cantidad+"</td>";
+			string+="<td><button type='button' onclick='delreception(this)'>x</button></td>";
+		string+="</tr>";
+	content.innerHTML+=string;
+
+	document.getElementById("txttransporte").value = '';
+	document.getElementById("txtchofer").value = '';
+	document.getElementById("txtplaca").value = '';
+	document.getElementById("txtproducto").value = '';
+	document.getElementById("txtcantidad").value = '';
+
 }
 
 $(function() {

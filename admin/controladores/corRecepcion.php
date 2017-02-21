@@ -8,6 +8,13 @@ $lobjRecepcion->acCodigo_origen=$_POST['txtcodigo_origen'];
 $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
+//arreglos
+$transporte = $_POST['transporte'];
+$chofer = $_POST['chofer'];
+$placa = $_POST['placa'];
+$producto = $_POST['producto'];
+$cantidad = $_POST['cantidad'];
+
 
 switch($lcOperacion){
 
@@ -18,8 +25,11 @@ switch($lcOperacion){
 		}else{
 			$lcListo = 1;
 			$lobjRecepcion->incluir();  
+			$total = count($transporte);
+			for($i=0;$i<$total;$i++){
+				$lobjRecepcion->incluir_recepcion($transporte[$i],$chofer[$i],$placa[$i],$producto[$i],$cantidad[$i]);
+			}
 		}
-	
 	break;
 	
 	case "buscar":
@@ -28,6 +38,7 @@ switch($lcOperacion){
 			$lcNro_recepcion=$lobjRecepcion->acNro_recepcion;
 $lcFecha_recepcion=$lobjRecepcion->acFecha_recepcion;
 $lcCodigo_origen=$lobjRecepcion->acCodigo_origen; 
+			$cad = $lobjRecepcion->listar();
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;
