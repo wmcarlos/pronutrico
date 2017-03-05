@@ -135,6 +135,42 @@ public function setDate($date){
 	$newd = $last[2]."/".$last[1]."/".$last[0];
 	return $newd;
 }
+
+public function reporte_recepciones(){
+	$this->ejecutar("select 
+	tle.nro_entrada,
+	date_format(te.fecha_entrada, '%d/%m/%Y') as fecha_entrada,
+	tp2.razon_social as proveedor,
+	tpr.nombre as producto,
+	tum.nombre as unidad_medida,
+	tle.cantidad as cantidad,
+	tle.placa as placa,
+	tle.chofer as chofer,
+	tp.razon_social as transportista
+	from tlinea_entrada as tle
+	inner join tentrada as te on (te.nro_entrada = tle.nro_entrada)
+	inner join tproveedor as tp on (tp.rif = tle.rif_transportista)
+	inner join tproveedor as tp2 on (te.rif_proveedor=tp2.rif)
+	inner join tproducto as tpr on (tpr.codigo = tle.codigo_producto)
+	inner join tunidad_medida as tum on (tum.codigo = tpr.codigo_unidad_medida)");
+
+	$cad = "";
+
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row["nro_entrada"]."</td>";
+			$cad.="<td>".$row["fecha_entrada"]."</td>";
+			$cad.="<td>".$row["proveedor"]."</td>";
+			$cad.="<td>".$row["producto"]."</td>";
+			$cad.="<td>".$row["unidad_medida"]."</td>";
+			$cad.="<td>".$row["cantidad"]."</td>";
+			$cad.="<td>".$row["placa"]."</td>";
+			$cad.="<td>".strtoupper($row["chofer"])."</td>";
+			$cad.="<td>".$row["transportista"]."</td>";
+		$cad.="</tr>";
+	}
+	return $cad;
+}
  
 //funcion eliminar        
 public function eliminar()
