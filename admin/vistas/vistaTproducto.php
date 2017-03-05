@@ -47,37 +47,41 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Nacionalidad:</td>
-<td><select name='txtnacionalidad' disabled='disabled' id='txtnacionalidad' class='validate[required]'><option value=''>Seleccione</option></select></td>
-</tr>
-<tr>
+<td><select name='txtnacionalidad' disabled='disabled' id='txtnacionalidad' class='validate[required]'>
+<option value='V'>Venezonalo</option>
+<option value='E' <?php print ($lcNacionalidad == "E") ? "selected" : ""; ?>>Extranjero</option>
+</select></td>
 <td align='right'><span class='rojo'>*</span> Nombre:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtnombre' value='<?php print($lcNombre);?>' id='txtnombre' class='validate[required]'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tipo Producto:</td>
-<td>Materia Prima <input type='radio' name='txttipo_producto' value='MP'/> Producto Terminado <input type='radio' name='txttipo_producto' value='PT'/> </td>
+<td colspan="3">Materia Prima <input type='radio' checked="checked" onclick="getchecked(this);" name='txttipo_producto' value='MP'/> Producto Terminado <input type='radio' name='txttipo_producto' onclick="getchecked(this);" <?php print ($lcTipo_producto=="PT") ? "checked='checked'" : ""; ?> value='PT'/> </td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Marca:</td>
-<td><select name='txtcodigo_marca' disabled='disabled' id='txtcodigo_marca' class='validate[required]'><option value=''>Seleccione</option></select></td>
-</tr>
-<tr>
+<td><select name='txtcodigo_marca' disabled='disabled' id='txtcodigo_marca' class='validate[required]'>
+<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo("tmarca","codigo","nombre",$lcCodigo_marca); ?>
+</select></td>
 <td align='right'><span class='rojo'>*</span> Unidad de Medida:</td>
-<td><select name='txtcodigo_unidad_medida' disabled='disabled' id='txtcodigo_unidad_medida' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td><select name='txtcodigo_unidad_medida' disabled='disabled' id='txtcodigo_unidad_medida' class='validate[required]'>
+<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo("tunidad_medida","codigo","nombre",$lcCodigo_unidad_medida); ?>
+</select></td>
 </tr>
-<tr>
+<?php if($lcTipo_producto != "PT") {?>
+<tr id="col1">
 <td align='right'><span class='rojo'>*</span> Existencia Minima:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtexistencia_minima' value='<?php print($lcExistencia_minima);?>' id='txtexistencia_minima' class='validate[required],custom[integer],min[1]'/></td>
-</tr>
-<tr>
+<td><input type='text' disabled='disabled' size="5" maxlength='' name='txtexistencia_minima' value='<?php print($lcExistencia_minima);?>' id='txtexistencia_minima' class='validate[required],custom[integer],min[1]'/></td>
 <td align='right'><span class='rojo'>*</span> Existencia Maxima:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtexistencia_maxima' value='<?php print($lcExistencia_maxima);?>' id='txtexistencia_maxima' class='validate[required],custom[integer],min[1]'/></td>
+<td><input type='text' size="5" disabled='disabled' maxlength='' name='txtexistencia_maxima' value='<?php print($lcExistencia_maxima);?>' id='txtexistencia_maxima' class='validate[required],custom[integer],min[1]'/></td>
 </tr>
-<tr>
+<tr id="col2">
 <td align='right'><span class='rojo'>*</span> Existencia:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtexistencia' value='<?php print($lcExistencia);?>' id='txtexistencia' class='validate[required],custom[integer]'/></td>
+<td colspan="3"><input type='text' size="5" readonly="readOnly" disabled='disabled' maxlength='' name='txtexistencia' value='<?php print($lcExistencia);?>' id='txtexistencia' class='validate[custom[integer]]'/></td>
 </tr>
-
+<?php } ?>
 <input type='hidden' name='txtoperacion' value='des'>
 <input type='hidden' name='txtvar_tem' value='<?php print($lcCodigo); ?>'>
 </table>

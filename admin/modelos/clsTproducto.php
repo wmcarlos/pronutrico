@@ -55,7 +55,15 @@ return $llEnc;
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {
-$lrTb=$this->ejecutar("select * from tproducto where((codigo like '%$valor%') or (nacionalidad like '%$valor%') or (nombre like '%$valor%') or (tipo_producto like '%$valor%') or (codigo_marca like '%$valor%') or (codigo_unidad_medida like '%$valor%') or (existencia_minima like '%$valor%') or (existencia_maxima like '%$valor%') or (existencia like '%$valor%'))");
+$lrTb=$this->ejecutar("
+	select 
+	p.codigo,
+	p.nombre,
+	p.tipo_producto,
+	m.nombre as marca
+	from tproducto as p
+	inner join tmarca as m on (m.codigo = p.codigo_marca)
+	where((p.codigo like '%$valor%') or (p.nombre like '%$valor%') or (p.tipo_producto like '%$valor%') or (m.nombre like '%$valor%'))");
 while($laRow=$this->arreglo())
 {		
 $this->acCodigo=$laRow['codigo'];
@@ -70,29 +78,18 @@ $this->acExistencia=$laRow['existencia'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>codigo</td>
-<td style='font-weight:bold; font-size:20px;'>nacionalidad</td>
-<td style='font-weight:bold; font-size:20px;'>nombre</td>
-<td style='font-weight:bold; font-size:20px;'>tipo_producto</td>
-<td style='font-weight:bold; font-size:20px;'>codigo_marca</td>
-<td style='font-weight:bold; font-size:20px;'>codigo_unidad_medida</td>
-<td style='font-weight:bold; font-size:20px;'>existencia_minima</td>
-<td style='font-weight:bold; font-size:20px;'>existencia_maxima</td>
-<td style='font-weight:bold; font-size:20px;'>existencia</td>
+			   <td style='font-weight:bold; font-size:20px;'>Codigo</td>
+				<td style='font-weight:bold; font-size:20px;'>Nombre (Marca)</td>
+				<td style='font-weight:bold; font-size:20px;'>Tipo Producto</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
+$tp = ($this->acTipo_producto == "MP") ? "Materia Prima" : "Producto Terminado";
 $llEnc=$llEnc."<tr>
 					<td>".$this->acCodigo."</td>
-<td>".$this->acNacionalidad."</td>
-<td>".$this->acNombre."</td>
-<td>".$this->acTipo_producto."</td>
-<td>".$this->acCodigo_marca."</td>
-<td>".$this->acCodigo_unidad_medida."</td>
-<td>".$this->acExistencia_minima."</td>
-<td>".$this->acExistencia_maxima."</td>
-<td>".$this->acExistencia."</td>
+					<td>".$this->acNombre." (".$laRow["marca"].")</td>
+					<td>".$tp."</td>
 					<td><a href='?txtcodigo=".$laRow['codigo']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }

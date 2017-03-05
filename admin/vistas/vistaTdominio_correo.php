@@ -46,8 +46,8 @@ function cargar()
 <td><input type='text' disabled='disabled' maxlength='' name='txtcodigo' value='<?php print($lcCodigo);?>' id='txtcodigo' class='validate[required]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Nombre:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtnombre' value='<?php print($lcNombre);?>' id='txtnombre' class='validate[required],custom[onlyLetterSp]'/></td>
+<td align='right'><span class='rojo'>*</span> Dominio:</td>
+<td><input type='text' disabled='disabled' maxlength='' name='txtnombre' value='<?php print($lcNombre);?>' id='txtnombre' class='validate[required]'/></td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>

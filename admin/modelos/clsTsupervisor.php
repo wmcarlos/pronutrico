@@ -70,29 +70,17 @@ $this->acEmail=$laRow['email'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>cedula</td>
-<td style='font-weight:bold; font-size:20px;'>nacionalidad</td>
-<td style='font-weight:bold; font-size:20px;'>nombres</td>
-<td style='font-weight:bold; font-size:20px;'>apellidos</td>
-<td style='font-weight:bold; font-size:20px;'>direccion</td>
-<td style='font-weight:bold; font-size:20px;'>codigo_area</td>
-<td style='font-weight:bold; font-size:20px;'>telefono</td>
-<td style='font-weight:bold; font-size:20px;'>codigo_dominio_correo</td>
-<td style='font-weight:bold; font-size:20px;'>email</td>
+			   <td style='font-weight:bold; font-size:20px;'>Cedula</td>
+				<td style='font-weight:bold; font-size:20px;'>Nombres</td>
+				<td style='font-weight:bold; font-size:20px;'>Apellidos</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
-					<td>".$this->acCedula."</td>
-<td>".$this->acNacionalidad."</td>
-<td>".$this->acNombres."</td>
-<td>".$this->acApellidos."</td>
-<td>".$this->acDireccion."</td>
-<td>".$this->acCodigo_area."</td>
-<td>".$this->acTelefono."</td>
-<td>".$this->acCodigo_dominio_correo."</td>
-<td>".$this->acEmail."</td>
+					<td>".$this->acNacionalidad."-".$this->acCedula."</td>
+					<td>".$this->acNombres."</td>
+					<td>".$this->acApellidos."</td>
 					<td><a href='?txtcedula=".$laRow['cedula']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }

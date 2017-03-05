@@ -42,15 +42,13 @@ $this->acNombre=$laRow['nombre'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>codigo</td>
-<td style='font-weight:bold; font-size:20px;'>nombre</td>
+				<td style='font-weight:bold; font-size:20px;'>Nombre</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
-					<td>".$this->acCodigo."</td>
-<td>".$this->acNombre."</td>
+					<td>".$this->acNombre."</td>
 					<td><a href='?txtcodigo=".$laRow['codigo']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }

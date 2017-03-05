@@ -76,45 +76,107 @@ function cargar_select(operacion,listo)
 			}
 }
 
-function delreception(e){
+function getSelectText(id){
+	return document.getElementById(id).options[document.getElementById(id).selectedIndex].text
+}
 
+function getElement(id){
+	return document.getElementById(id);
+}
+
+function verifyarray(arr, val){
+	var exist = false;
+	var arr = document.getElementsByName(arr);
+	var total = arr.length;
+	var cont = 0;
+
+	for(var i = 0; i < total ; i++){
+		if(val == arr[i].value){
+			cont++;
+		}
+	}
+
+	if(cont > 0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function delrecepcion(e){
 	var td = e.parentNode;
 	var tr = td.parentNode;
 	var tbody = tr.parentNode;
 	tbody.removeChild(tr);
 }
 
-function addreception(){
-	var content = document.getElementById("detail_content");
-	var codtrans = document.getElementById("txttransporte").value;
-	var texttrans = document.getElementById("txttransporte").options[document.getElementById("txttransporte").selectedIndex].text;
-	var cedchofer = document.getElementById("txtchofer").value;
-	var textchofer = document.getElementById("txtchofer").options[document.getElementById("txttransporte").selectedIndex].text;
-	var placa = document.getElementById("txtplaca").value;
-	var codproducto = document.getElementById("txtproducto").value;
-	var textproducto = document.getElementById("txtproducto").options[document.getElementById("txtproducto").selectedIndex].text;
-	var cantidad = document.getElementById("txtcantidad").value;
-	if(document.getElementById("txttransporte").value && document.getElementById("txtchofer") && document.getElementById("txtplaca").value && document.getElementById("txtproducto").value){
-		var string = "";
-		string+="<tr>";
-			string+="<td><input type='hidden' name='transporte[]' value='"+codtrans+"'>"+texttrans+"</td>";
-			string+="<td><input type='hidden' name='chofer[]' value='"+cedchofer+"'>"+textchofer+"</td>";
-			string+="<td><input type='hidden' name='placa[]' value='"+placa+"'>"+placa+"</td>";
-			string+="<td><input type='hidden' name='producto[]' value='"+codproducto+"'>"+textproducto+"</td>";
-			string+="<td><input type='hidden' name='cantidad[]' value='"+cantidad+"'>"+cantidad+"</td>";
-			string+="<td><button type='button' onclick='delreception(this)'>x</button></td>";
-		string+="</tr>";
-		content.innerHTML+=string;
+function addrecepcion(){
+	var producto = getSelectText("txtproducto");
+	var idproducto = getElement("txtproducto").value;
+	var transportista = getSelectText("txttransportista");
+	var idtransportista = getElement("txttransportista").value;
+	var chofer = getElement("txtchofer").value;
+	var placa = getElement("txtplaca").value;
+	var cantidad = getElement("txtcantidad").value;
+	var cad = "";
 
-		document.getElementById("txttransporte").value = '';
-		document.getElementById("txtchofer").value = '';
-		document.getElementById("txtplaca").value = '';
-		document.getElementById("txtproducto").value = '';
-		document.getElementById("txtcantidad").value = '';
+	if(producto && transportista && chofer && placa && cantidad){
+		if(verifyarray("productos[]",idproducto) && verifyarray("transportistas[]",idtransportista)){
+			alert("Ya este producto del mismo Proveedor fue Agregado");
+		}else{
+			cad+="<tr>";
+				cad+="<td><input type='hidden' name='productos[]' value='"+idproducto+"'>"+producto+"</td>";
+				cad+="<td><input type='hidden' name='transportistas[]' value='"+idtransportista+"'>"+transportista+"</td>";
+				cad+="<td><input type='hidden' name='choferes[]' value='"+chofer+"'/>"+chofer+"</td>";
+				cad+="<td><input type='hidden' name='placas[]' value='"+placa+"'/>"+placa+"</td>";
+				cad+="<td><input type='hidden' name='cantidades[]' value='"+cantidad+"'/>"+cantidad+"</td>";
+				cad+="<td><button type='button' onclick='delrecepcion(this);'>X</button></td>";
+			cad+="</tr>";
+
+			getElement("contenedor_recepcion").innerHTML += cad;
+		}
 	}else{
-		alert("Todos los Campos son Obligatorios");
+		alert("Todos los campos son Obligatorios");
 	}
-	
+
+	getElement("txtproducto").value = "";
+	getElement("txttransportista").value = "";
+	getElement("txtchofer").value = "";
+	getElement("txtplaca").value = "";
+	getElement("txtcantidad").value = "";
+}
+
+function adddespacho(){
+	var producto = getSelectText("txtproducto");
+	var idproducto = getElement("txtproducto").value;
+	var cantidad = getElement("txtcantidad").value;
+	var cad = "";
+
+	if(idproducto && cantidad){
+		if(verifyarray("productos[]",idproducto)){
+			alert("Ya este producto del mismo Proveedor fue Agregado");
+		}else{
+			cad+="<tr>";
+				cad+="<td><input type='hidden' name='productos[]' value='"+idproducto+"'>"+producto+"</td>";
+				cad+="<td><input type='hidden' name='cantidades[]' value='"+cantidad+"'/>"+cantidad+"</td>";
+				cad+="<td><button type='button' onclick='delrecepcion(this);'>X</button></td>";
+			cad+="</tr>";
+			getElement("contenedor_despacho").innerHTML += cad;
+		}
+	}else{
+		alert("Todos los campos son Obligatorios");
+	}
+
+	getElement("txtproducto").value = "";
+	getElement("txtcantidad").value = "";
+}
+
+function getchecked(e){
+	if(e.value == "PT"){
+		$("#col1, #col2").hide();
+	}else{
+		$("#col1, #col2").show();
+	}
 }
 
 $(function() {

@@ -46,17 +46,15 @@ $this->acUbicacion=$laRow['ubicacion'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>codigo_area</td>
-<td style='font-weight:bold; font-size:20px;'>codificacion</td>
-<td style='font-weight:bold; font-size:20px;'>ubicacion</td>
+				<td style='font-weight:bold; font-size:20px;'>Codificacion</td>
+				<td style='font-weight:bold; font-size:20px;'>Ubicacion</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
-					<td>".$this->acCodigo_area."</td>
-<td>".$this->acCodificacion."</td>
-<td>".$this->acUbicacion."</td>
+					<td>".$this->acCodificacion."</td>
+					<td>".$this->acUbicacion."</td>
 					<td><a href='?txtcodigo_area=".$laRow['codigo_area']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }

@@ -66,27 +66,15 @@ $this->acCorreo=$laRow['correo'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>rif</td>
-<td style='font-weight:bold; font-size:20px;'>razon_social</td>
-<td style='font-weight:bold; font-size:20px;'>codigo_tipo_proveedor</td>
-<td style='font-weight:bold; font-size:20px;'>direccion</td>
-<td style='font-weight:bold; font-size:20px;'>codigo_area</td>
-<td style='font-weight:bold; font-size:20px;'>telefono</td>
-<td style='font-weight:bold; font-size:20px;'>codigo_dominio_correo</td>
-<td style='font-weight:bold; font-size:20px;'>correo</td>
+			   <td style='font-weight:bold; font-size:20px;'>Rif</td>
+				<td style='font-weight:bold; font-size:20px;'>Razon Social</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
 					<td>".$this->acRif."</td>
-<td>".$this->acRazon_social."</td>
-<td>".$this->acCodigo_tipo_proveedor."</td>
-<td>".$this->acDireccion."</td>
-<td>".$this->acCodigo_area."</td>
-<td>".$this->acTelefono."</td>
-<td>".$this->acCodigo_dominio_correo."</td>
-<td>".$this->acCorreo."</td>
+					<td>".$this->acRazon_social."</td>
 					<td><a href='?txtrif=".$laRow['rif']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }

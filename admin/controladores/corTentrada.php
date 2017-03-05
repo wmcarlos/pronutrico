@@ -8,6 +8,14 @@ $lobjTentrada->acRif_proveedor=$_POST['txtrif_proveedor'];
 $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
+//detalles
+$productos = $_POST["productos"];
+$transportistas = $_POST["transportistas"];
+$choferes = $_POST["choferes"];
+$placas = $_POST["placas"];
+$cantidades = $_POST["cantidades"];
+//fin detalles
+
 
 switch($lcOperacion){
 
@@ -17,7 +25,26 @@ switch($lcOperacion){
 			$lcListo = 0;
 		}else{
 			$lcListo = 1;
-			$lobjTentrada->incluir();  
+			$conterror = 0;
+
+			$lobjTentrada->transaction("BEGIN");
+			if(!$lobjTentrada->incluir()){
+				$conterror++;
+			}
+			for($i = 0; $i < count($productos); $i++){
+				if(!$lobjTentrada->incluir_detalle($productos[$i],$transportistas[$i],$choferes[$i],$placas[$i],$cantidades[$i])){
+					$conterror++;
+				}
+
+				if(!$lobjTentrada->plusinventory($productos[$i], $cantidades[$i])){
+					$conterror++;
+				}
+			}
+			if($conterror > 0){
+				$lobjTentrada->transaction("ROOLBACK");
+			}else{
+				$lobjTentrada->transaction("COMMIT");
+			}
 		}
 	
 	break;
@@ -26,8 +53,9 @@ switch($lcOperacion){
 	
 		if($lobjTentrada->buscar()){
 			$lcNro_entrada=$lobjTentrada->acNro_entrada;
-$lcFecha_entrada=$lobjTentrada->acFecha_entrada;
-$lcRif_proveedor=$lobjTentrada->acRif_proveedor; 
+			$lcFecha_entrada=$lobjTentrada->acFecha_entrada;
+			$lcRif_proveedor=$lobjTentrada->acRif_proveedor; 
+			$cadena = $lobjTentrada->listar_detalle();
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;
@@ -36,12 +64,25 @@ $lcRif_proveedor=$lobjTentrada->acRif_proveedor;
 	break;
 	
 	case "modificar":
-	
-		if($lobjTentrada->modificar($lcVarTem)>=1){
-		$lcListo = 1;
-		}else{
-		$lcListo = 0;
+
+		$conterror = 0;
+		$lobjTentrada->transaction("BEGIN");
+
+		$lobjTentrada->modificar($lcVarTem);
+		$lobjTentrada->delete_detalle();
+
+		for($i = 0; $i < count($productos); $i++){
+			if(!$lobjTentrada->incluir_detalle($productos[$i],$transportistas[$i],$choferes[$i],$placas[$i],$cantidades[$i])){
+				$conterror++;
+			}
 		}
+		if($conterror > 0){
+			$lobjTentrada->transaction("ROLLBACK");
+		}else{
+			$lobjTentrada->transaction("COMMIT");
+		}
+
+		$lcListo = 1;
 	
 	break;
 	
