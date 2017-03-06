@@ -3,7 +3,7 @@
     <div id="izquierdo">
 			<h1 class="titulo">Visi&oacute;n</h1>
 			<p class="parrafo">
-				Proximamente Formulario y datos de Contactos Aqui!!
+				Ser una empresa reconocida en el mercado por la calidad y confiabilidad de sus productos.
 			</p>
     </div>
 	<!--Contenido Derecho-->

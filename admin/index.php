@@ -79,11 +79,11 @@ mostrar_mensaje = function(){
   ?>
   var error = '<?php print $error; ?>';
   if(error == "si"){
-      alert("Contraseña Cambiada Con  Existo");
+      alert("Clave Cambiada Con  Existo");
   }else if(error == "no"){
-  	alert("Ocurrio un Error al Cambiar la Contraseña");
+  	alert("Ocurrio un Error al Cambiar la Clave");
   }else if(error == "no_pass"){
-  	alert("Usuario o Contraseña Invalidos");
+  	alert("Usuario o Clave Invalidos");
   }else if( error == "bloqueado" ){
   	alert("Este Usuario esta Bloqueado");
   }else if( error == "user_block"){
