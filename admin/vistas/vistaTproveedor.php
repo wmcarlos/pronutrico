@@ -67,14 +67,14 @@ function cargar()
 <td><textarea name='txtdireccion' maxlength='' disabled='disabled' id='txtdireccion' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Telefono:</td>
-<td colspan="3"><select name='txtcodigo_area' disabled='disabled' id='txtcodigo_area' class='validate[required],custom[integer]'><option value=''>Seleccione</option>
+<td align='right'>Telefono:</td>
+<td colspan="3"><select name='txtcodigo_area' disabled='disabled' id='txtcodigo_area' class='validate[custom[integer]]'><option value=''>Seleccione</option>
 <?php print $objFunciones->crear_combo("tcodigo_area","codigo_area","concat(codificacion,'-',ubicacion)",$lcCodigo_area); ?>
-</select>-<input type='text' disabled='disabled' maxlength='7' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[required],custom[integer],maxSize[7],minSize[7]'/></td>
+</select>-<input type='text' disabled='disabled' maxlength='7' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[custom[integer],maxSize[7],minSize[7]]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Correo:</td>
-<td colspan="3"><input type="text" name='txtcorreo' disabled='disabled' id='txtcorreo' value='<?php print $lcCorreo; ?>' class='validate[required]' />@<select name='txtcodigo_dominio_correo' disabled='disabled' id='txtcodigo_dominio_correo' class='validate[required]'>
+<td align='right'>Correo:</td>
+<td colspan="3"><input type="text" name='txtcorreo' disabled='disabled' id='txtcorreo' value='<?php print $lcCorreo; ?>' />@<select name='txtcodigo_dominio_correo' disabled='disabled' id='txtcodigo_dominio_correo'>
 <option value=''>Seleccione</option>
 <?php print $objFunciones->crear_combo("tdominio_correo","codigo","nombre",$lcCodigo_dominio_correo); ?>
 </select></td>

@@ -27,9 +27,10 @@
 		</style>
 	</head>
 	<body>
-	<div id="content">
+	<div id="content" style="height:980px;">
 	   <img src="img/banner.png" width="723"/>
 	   <center><h3>DATA PRODUCCION X TURNO EMPAQUE</h3></center>
+	   <table width="100%"><tr><td align="right"><b>Fecha Hora: </b>'.date("d/m/Y H:m:s").'</td></tr></table>
 		<table id="customers">
 		<tr>
 			<td>Fecha</td>
@@ -46,6 +47,7 @@
 		'.$cad.'
 	</table> 
 	</div>
+	<table width="100%"><tr><td align="center"><b>Pagina</b> 1 / 1</td></tr></table>
 	</body>
 	</html>';
 
