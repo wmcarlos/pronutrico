@@ -27,8 +27,6 @@
             <li><a href="./" <?php if($v=="home"){print 'class="active"'; } ?>>Inicio</a></li>
             <li><a href="?v=about" <?php if($v=="about"){print 'class="active"'; } ?>>Quienes Somos</a></li>
             <li><a href="?v=history" <?php if($v=="history"){print 'class="active"'; } ?>>Reseña Historica</a></li>
-            <li><a href="?v=news" <?php if($v=="news"){print 'class="active"'; } ?>>Noticias</a></li>
-            <li><a href="?v=contacts" <?php if($v=="contacts"){print 'class="active"'; } ?>>Contactanos</a></li>
             <li><a href="admin/">Entrar</a></li>
         </ul>
    </div>
