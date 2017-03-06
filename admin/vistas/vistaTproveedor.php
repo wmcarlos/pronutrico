@@ -43,7 +43,17 @@ function cargar()
 <table border='1' class='datos' align='center'>
 <tr >
 <td align='right'><span class='rojo'>*</span> Rif:</td>
-<td><input type='text' disabled='disabled' maxlength='9' name='txtrif' value='<?php print($lcRif);?>' id='txtrif' class='validate[required],custom[integer],maxSize[9],minSize[8]'/></td>
+<td>
+<select name='txtletrarif' class="validate[required]" disabled="disabled">
+	<option value="V" <?php if($letrarif == "V"){ print "selected='selected'; ";} ?>>V</option>
+	<option value="E" <?php if($letrarif == "E"){ print "selected='selected'; "; } ?>>E</option>
+	<option value="J" <?php if($letrarif == "J"){ print "selected='selected'; "; } ?>>J</option>
+	<option value="G" <?php if($letrarif == "G"){ print "selected='selected'; "; } ?>>G</option>
+	<option value="C" <?php if($letrarif == "C"){ print "selected='selected'; "; } ?>>C</option>
+	<option value="P" <?php if($letrarif == "P"){ print "selected='selected'; "; } ?>>P</option>
+</select>-<input type='text' disabled='disabled' maxlength='9' name='txtrif' value='<?php print($lcRif);?>' id='txtrif' class='validate[required],custom[integer],maxSize[9],m
+<option value="V">V</option>
+<option value="V">V</option>inSize[8]'/></td>
 <td align='right'><span class='rojo'>*</span> Razón Social:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtrazon_social' value='<?php print($lcRazon_social);?>' id='txtrazon_social' class='validate[required]'/></td>
 </tr>

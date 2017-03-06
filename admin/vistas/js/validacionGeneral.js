@@ -26,8 +26,15 @@ var f = document.form1;
 $('#form1').find('input').attr("disabled",false);
 $('#form1').find('textarea').attr("disabled",false);
 $('#form1').find('select').attr("disabled",false);	
-f[0].disabled = true;
-f[1].focus();
+
+if(document.getElementById("txtrif")){
+	f[0].disabled = true;
+	f[1].disabled = true;
+	f[2].focus();
+}else{
+	f[0].disabled = true;
+	f[1].focus();
+}
 //botones	
 f.txtoperacion.value = 'modificar';
 f.btnincluir.disabled = true;
@@ -150,15 +157,21 @@ function adddespacho(){
 	var producto = getSelectText("txtproducto");
 	var idproducto = getElement("txtproducto").value;
 	var cantidad = getElement("txtcantidad").value;
+	var matempcons = getElement("txtmatempcons").value;
+	var bolcons = getElement("txtbolcon").value;
+	var desperdicios = getElement("txtdesperdicios").value;
 	var cad = "";
 
-	if(idproducto && cantidad){
+	if(idproducto && cantidad && matempcons && bolcons && desperdicios){
 		if(verifyarray("productos[]",idproducto)){
 			alert("Ya este producto del mismo Proveedor fue Agregado");
 		}else{
 			cad+="<tr>";
 				cad+="<td><input type='hidden' name='productos[]' value='"+idproducto+"'>"+producto+"</td>";
 				cad+="<td><input type='hidden' name='cantidades[]' value='"+cantidad+"'/>"+cantidad+"</td>";
+				cad+="<td><input type='hidden' name='matempcons[]' value='"+matempcons+"'/>"+matempcons+"</td>";
+				cad+="<td><input type='hidden' name='bolcons[]' value='"+bolcons+"'/>"+bolcons+"</td>";
+				cad+="<td><input type='hidden' name='desperdicios[]' value='"+desperdicios+"'/>"+desperdicios+"</td>";
 				cad+="<td><button type='button' onclick='delrecepcion(this);'>X</button></td>";
 			cad+="</tr>";
 			getElement("contenedor_despacho").innerHTML += cad;
@@ -169,6 +182,9 @@ function adddespacho(){
 
 	getElement("txtproducto").value = "";
 	getElement("txtcantidad").value = "";
+	getElement("txtmatempcons").value = "";
+	getElement("txtbolcon").value = "";
+	getElement("txtdesperdicios").value = "";
 }
 
 function getchecked(e){

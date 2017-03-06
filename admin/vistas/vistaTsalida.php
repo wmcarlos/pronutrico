@@ -68,19 +68,31 @@ function cargar()
 <h1>Detalle Despacho</h1>
 <table border='1' class='datos' align='center'>
 <tr>
-	<td>Producto</td>
+	<td>Producto / Marca</td>
 	<td>Cantidad</td>
+	<td>Mat. Empa. Consumido</td>
+	<td>Bolsones Consumidos</td>
+	<td>Desperdicios</td>
 	<td>-</td>
 </tr>
 <tr>
 	<td>
 		<select name="txtproducto" disabled="disabled" id="txtproducto">
 			<option value="">Seleccione</option>
-			<?php print $objFunciones->crear_combo("tproducto where tipo_producto = 'PT'","codigo","nombre",null); ?>
+			<?php print $marcas; ?>
 		</select>
 	</td>
 	<td>
 		<input type="text" name="txtcantidad" disabled="disabled" size="10" id="txtcantidad">
+	</td>
+	<td>
+		<input type="text" name="txtmatempcons" disabled="disabled" size="10" id="txtmatempcons">
+	</td>
+	<td>
+		<input type="text" name="txtbolcon" disabled="disabled" size="10" id="txtbolcon">
+	</td>
+	<td>
+		<input type="text" name="txtdesperdicios" disabled="disabled" size="10" id="txtdesperdicios">
 	</td>
 	<td>
 		<button type="button" name="btnadd" id="btnadd" onclick="adddespacho();">+</button>

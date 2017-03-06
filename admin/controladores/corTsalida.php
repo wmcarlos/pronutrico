@@ -9,9 +9,14 @@ $lobjTsalida->acTurno=$_POST['txtturno'];
 $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
+$marcas = $lobjTsalida->listar_productos_marcas();
+
 //detalles
 $productos = $_POST["productos"];
 $cantidades = $_POST["cantidades"];
+$matempcons = $_POST["matempcons"];
+$bolcons = $_POST["bolcons"];
+$desperdicios = $_POST["desperdicios"];
 //fin detalles
 
 switch($lcOperacion){
@@ -33,7 +38,7 @@ switch($lcOperacion){
 
 
 			for($i = 0; $i < count($productos); $i++){
-				if(!$lobjTsalida->incluir_detalle($productos[$i],$cantidades[$i])){
+				if(!$lobjTsalida->incluir_detalle($productos[$i],$cantidades[$i], $matempcons[$i], $bolcons[$i], $desperdicios[$i])){
 					$conterror++;
 
 				}
@@ -78,7 +83,7 @@ $cadena = $lobjTsalida->listar_detalle();
 		$lobjTsalida->delete_detalle();
 
 		for($i = 0; $i < count($productos); $i++){
-			if(!$lobjTsalida->incluir_detalle($productos[$i],$cantidades[$i])){
+			if(!$lobjTsalida->incluir_detalle($productos[$i],$cantidades[$i],$matempcons[$i], $bolcons[$i], $desperdicios[$i])){
 				$conterror++;
 			}
 		}

@@ -44,4 +44,18 @@ session_start();
    </div>
 </div>
 </body>
+<script type="text/javascript">
+  var arrelement = document.getElementsByTagName("a");
+  var total = arrelement.length;
+  for(var i = 0; i < total; i++){
+    switch(arrelement[i].getAttribute("href")){
+      case "vistaReporte_recepciones.php":
+        arrelement[i].setAttribute("target","_blank");
+      break;
+      case "vistaReporte_despachos.php":
+        arrelement[i].setAttribute("target","_blank");
+      break;
+    }
+  }
+</script>
 </html>

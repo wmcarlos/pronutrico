@@ -9,6 +9,7 @@ private $acCodigo_area;
 private $acTelefono;
 private $acCodigo_dominio_correo;
 private $acCorreo;
+private $letrarif;
 
 //constructor de la clase		
 public function __construct(){
@@ -84,6 +85,7 @@ return $inicio.$llEnc.$final;
 //funcion inlcuir
 public function incluir()
 {
+	$this->acRif = $this->letrarif."-".$this->acRif;
 return $this->ejecutar("insert into tproveedor(rif,razon_social,codigo_tipo_proveedor,direccion,codigo_area,telefono,codigo_dominio_correo,correo)values('$this->acRif','$this->acRazon_social','$this->acCodigo_tipo_proveedor','$this->acDireccion','$this->acCodigo_area','$this->acTelefono','$this->acCodigo_dominio_correo','$this->acCorreo')");
 }
         

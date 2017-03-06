@@ -10,9 +10,18 @@
    </div>
 </div>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("a[href*='vistaLista_de_productos.php']").attr("target","_blank");
-  });
+  var arrelement = document.getElementsByTagName("a");
+  var total = arrelement.length;
+  for(var i = 0; i < total; i++){
+    switch(arrelement[i].getAttribute("href")){
+      case "vistaReporte_recepciones.php":
+        arrelement[i].setAttribute("target","_blank");
+      break;
+      case "vistaReporte_despachos.php":
+        arrelement[i].setAttribute("target","_blank");
+      break;
+    }
+  }
 </script>
 </body>
 </html>

@@ -29,8 +29,7 @@
 	<body>
 	<div id="content">
 	   <img src="img/banner.png" width="723"/>
-	   <div style="margin-right: 500px;">hola</div>
-	   <center><h3>Productos Recibidos en Planta Industrial Pronutrico</h3></center>
+	   <center><h3>Materia Prima Recibida en Planta Industrial Pronutrico</h3></center>
 		<table id="customers">
 		<tr>
 			<td>Nro Recepcion</td>

@@ -76,6 +76,25 @@ $llEnc=$llEnc."<tr>
 return $inicio.$llEnc.$final;
 }
 
+public function listar_productos_marcas(){
+	$this->ejecutar("
+	select
+	 tp.codigo as codigo_producto,
+	 tp.nombre as producto,
+	 tm.nombre as marca
+	 from tproducto as tp
+	 inner join tmarca as tm on (tm.codigo = tp.codigo_marca)
+	 where tp.tipo_producto = 'PT'");
+
+	$cad = "";
+
+	while($row = $this->arreglo()){
+		$cad.="<option value='".$row["codigo_producto"]."'>".$row["producto"]."(".$row["marca"].")</option>";
+	}
+
+	return $cad;
+}
+
 //funcion inlcuir
 public function incluir()
 {
@@ -84,8 +103,8 @@ public function incluir()
 return $this->ejecutar("insert into tsalida(nro_salida,fecha_salida,ceudula_supervisor,turno)values('$this->acNro_salida','$this->acFecha_salida','$this->acCeudula_supervisor','$this->acTurno')");
 }
 
-public function incluir_detalle($producto,$cantidad){
-	return $this->ejecutar("insert into tlinea_salida(nro_salida,codigo_producto,cantidad) values ($this->acNro_salida,$producto,$cantidad)");
+public function incluir_detalle($producto,$cantidad,$matempcons,$bolcom,$desperdicios){
+	return $this->ejecutar("insert into tlinea_salida(nro_salida,codigo_producto,cantidad, matempcons, bolcom, desperdicio) values ($this->acNro_salida,$producto,$cantidad,$matempcons,$bolcom,$desperdicios)");
 }
 
 public function listar_detalle(){
@@ -93,7 +112,10 @@ public function listar_detalle(){
 		select 
 		ls.codigo_producto,
 		p.nombre as producto,
-		ls.cantidad
+		ls.cantidad,
+		ls.matempcons,
+		ls.bolcom,
+		ls.desperdicio
 		from tlinea_salida as ls
 		inner join tproducto as p on (ls.codigo_producto = p.codigo)
 		where ls.nro_salida = $this->acNro_salida");
@@ -104,6 +126,9 @@ public function listar_detalle(){
 		$cad.="<tr>";
 			$cad.="<td><input type='hidden' name='productos[]' value='".$row["codigo_producto"]."'/>".$row["producto"]."</td>";
 			$cad.="<td><input type='hidden' name='cantidades[]' value='".$row["cantidad"]."'/>".$row["cantidad"]."</td>";
+			$cad.="<td><input type='hidden' name='cantidades[]' value='".$row["matempcons"]."'/>".$row["matempcons"]."</td>";
+			$cad.="<td><input type='hidden' name='cantidades[]' value='".$row["bolcom"]."'/>".$row["bolcom"]."</td>";
+			$cad.="<td><input type='hidden' name='cantidades[]' value='".$row["desperdicio"]."'/>".$row["desperdicio"]."</td>";
 			$cad.="<td><button type='button' onclick='delrecepcion(this);'>X</button></td>";
 		$cad.="</tr>";
 	}
@@ -148,6 +173,44 @@ public function setDate($date){
 	$last = explode("/", $date);
 	$newd = $last[2]."/".$last[1]."/".$last[0];
 	return $newd;
+}
+
+public function reporte_despachos(){
+	$this->ejecutar("select 
+date_format(ts.fecha_salida, '%d/%m/%Y') as fecha_salida,
+ts.turno,
+concat(tsu.nombres,' ',tsu.apellidos) as supervisor,
+tp.nombre as producto,
+tum.nombre as unidad_medida,
+tls.cantidad,
+tmar.nombre as marca,
+tls.matempcons,
+tls.bolcom,
+tls.desperdicio
+from tlinea_salida as tls
+inner join tsalida as ts on (ts.nro_salida = tls.nro_salida)
+inner join tproducto as tp on (tp.codigo = tls.codigo_producto)
+inner join tsupervisor as tsu on (tsu.cedula = ts.ceudula_supervisor)
+inner join tunidad_medida as tum on (tum.codigo = tp.codigo_unidad_medida)
+inner join tmarca as tmar on (tmar.codigo = tp.codigo_marca)");
+
+	$cad = "";
+
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row["fecha_salida"]."</td>";
+			$cad.="<td>".$row["turno"]."</td>";
+			$cad.="<td>".$row["supervisor"]."</td>";
+			$cad.="<td>".$row["producto"]."</td>";
+			$cad.="<td>".$row["unidad_medida"]."</td>";
+			$cad.="<td>".$row["cantidad"]."</td>";
+			$cad.="<td>".$row["marca"]."</td>";
+			$cad.="<td>".$row["matempcons"]."</td>";
+			$cad.="<td>".$row["bolcom"]."</td>";
+			$cad.="<td>".$row["desperdicio"]."</td>";
+		$cad.="</tr>";
+	}
+	return $cad;
 }
 
 public function transaction($t){
