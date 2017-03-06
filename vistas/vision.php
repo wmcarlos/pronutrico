@@ -1,7 +1,7 @@
 <div id="contenido">
 	<!--Contenido derecho-->
     <div id="izquierdo">
-			<h1 class="titulo">Galeria</h1>
+			<h1 class="titulo">Visi&oacute;n</h1>
 			<p class="parrafo">
 				Proximamente Formulario y datos de Contactos Aqui!!
 			</p>

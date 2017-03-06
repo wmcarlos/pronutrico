@@ -25,7 +25,12 @@
     <div id="nav">
         <ul id="jsddm" class="clearfix">
             <li><a href="./" <?php if($v=="home"){print 'class="active"'; } ?>>Inicio</a></li>
-            <li><a href="?v=about" <?php if($v=="about"){print 'class="active"'; } ?>>Quienes Somos</a></li>
+            <li><a href="?v=about" <?php if($v=="about"){print 'class="active"'; } ?>>Nosotros</a>
+            <ul>
+                <li><a href='?v=mision'>Misi&oacute;n</a></li>
+                <li><a href='?v=vision'>Visi&oacute;n</a></li>
+            </ul>
+            </li>
             <li><a href="?v=history" <?php if($v=="history"){print 'class="active"'; } ?>>Reseña Historica</a></li>
             <li><a href="admin/">Entrar</a></li>
         </ul>

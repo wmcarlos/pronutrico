@@ -13,13 +13,13 @@
 				$view = "vistas/history.php";
 				$title = "Rese&ntilde;a Historica";
 			break;
-			case 'news':
-				$view = "vistas/news.php";
-				$title = "Noticias";
+			case 'mision':
+				$view = "vistas/mision.php";
+				$title = "Misi&oacuate;n";
 			break;
-			case 'contacts':
-				$view = "vistas/contacts.php";
-				$title = "Contactos";
+			case 'vision':
+				$view = "vistas/vision.php";
+				$title = "Visi&oacute;n";
 			break;
 			default:
 				$view = "vistas/home.php";
