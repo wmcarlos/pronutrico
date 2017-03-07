@@ -80,10 +80,10 @@ function cargar()
 		</select>
 	</td>
 	<td>
-		<input type="text" name="txtchofer" disabled="disabled" size="15" id="txtchofer">
+		<input type="text" name="txtchofer" onkeypress="return soloLetras(event);" disabled="disabled" size="15" id="txtchofer">
 	</td>
 	<td>
-		<input type="text" name="txtplaca" disabled="disabled" size="5" id="txtplaca">
+		<input type="text" name="txtplaca" disabled="disabled" maxlength="7" size="5" id="txtplaca">
 	</td>
 	<td>
 		<input type="text" name="txtcantidad" disabled="disabled" size="4" id="txtcantidad">

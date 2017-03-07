@@ -128,19 +128,23 @@ function addrecepcion(){
 	var cad = "";
 
 	if(producto && transportista && chofer && placa && cantidad){
-		if(verifyarray("productos[]",idproducto) && verifyarray("transportistas[]",idtransportista)){
-			alert("Ya este producto del mismo Proveedor fue Agregado");
+		if(placa.length < 6){
+			alert("La placa debe tener al menos 6 Caracteres");
 		}else{
-			cad+="<tr>";
-				cad+="<td><input type='hidden' name='productos[]' value='"+idproducto+"'>"+producto+"</td>";
-				cad+="<td><input type='hidden' name='transportistas[]' value='"+idtransportista+"'>"+transportista+"</td>";
-				cad+="<td><input type='hidden' name='choferes[]' value='"+chofer+"'/>"+chofer+"</td>";
-				cad+="<td><input type='hidden' name='placas[]' value='"+placa+"'/>"+placa+"</td>";
-				cad+="<td><input type='hidden' name='cantidades[]' value='"+cantidad+"'/>"+cantidad+"</td>";
-				cad+="<td><button type='button' onclick='delrecepcion(this);'>X</button></td>";
-			cad+="</tr>";
+			if(verifyarray("productos[]",idproducto) && verifyarray("transportistas[]",idtransportista)){
+				alert("Ya este producto del mismo Proveedor fue Agregado");
+			}else{
+				cad+="<tr>";
+					cad+="<td><input type='hidden' name='productos[]' value='"+idproducto+"'>"+producto+"</td>";
+					cad+="<td><input type='hidden' name='transportistas[]' value='"+idtransportista+"'>"+transportista+"</td>";
+					cad+="<td><input type='hidden' name='choferes[]' value='"+chofer+"'/>"+chofer+"</td>";
+					cad+="<td><input type='hidden' name='placas[]' value='"+placa+"'/>"+placa+"</td>";
+					cad+="<td><input type='hidden' name='cantidades[]' value='"+cantidad+"'/>"+cantidad+"</td>";
+					cad+="<td><button type='button' onclick='delrecepcion(this);'>X</button></td>";
+				cad+="</tr>";
 
-			getElement("contenedor_recepcion").innerHTML += cad;
+				getElement("contenedor_recepcion").innerHTML += cad;
+			}
 		}
 	}else{
 		alert("Todos los campos son Obligatorios");
@@ -194,6 +198,25 @@ function getchecked(e){
 		$("#col1, #col2").show();
 	}
 }
+
+ function soloLetras(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
 
 $(function() {
 	$( ".fecha_formateada" ).datepicker({
