@@ -29,7 +29,7 @@
 	<body>
 	<div id="content" style="height:980px;">
 	   <img src="img/banner.png" width="723"/>
-	   <center><h3>DATA PRODUCCION X TURNO EMPAQUE</h3></center>
+	   <center><h3>DATA PRODUCCI&Oacute;N POR TURNO EMPAQUE</h3></center>
 	   <table width="100%"><tr><td align="right"><b>Fecha Hora: </b>'.date("d/m/Y H:m:s").'</td></tr></table>
 		<table id="customers">
 		<tr>
