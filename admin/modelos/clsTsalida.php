@@ -76,6 +76,13 @@ $llEnc=$llEnc."<tr>
 return $inicio.$llEnc.$final;
 }
 
+public function essupervisor($name){
+	$split = explode(" ", $name);
+
+	$this->ejecutar("select * from tsupervisor where nombres = '".$split[0]."' and apellidos = '".$split[1]."'");
+	return $this->arreglo();
+}
+
 public function listar_productos_marcas(){
 	$this->ejecutar("
 	select

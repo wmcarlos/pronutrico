@@ -30,7 +30,7 @@ session_start();
             <div class="cuadro">
             	<h1 class="titulo2">Bienvenido</h1>
                 <p>
-                    Usuario : <?php print $_SESSION['full_name'] ?>
+                    Usuario : <?php print $_SESSION['full_name']; ?>
                 </p>
             </div>
         </div>

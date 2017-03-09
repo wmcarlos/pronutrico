@@ -49,10 +49,21 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Supervisor:</td>
-<td><select name='txtceudula_supervisor' disabled='disabled' id='txtceudula_supervisor' class='validate[required]'>
-<option value=''>Seleccione</option>
-	<?php print $objFunciones->crear_combo("tsupervisor","cedula","concat(nombres,' ',apellidos)",$lcCeudula_supervisor); ?>
-</select></td>
+<td>
+<?php if(isset($cedulaSuLogin) and !empty($cedulaSuLogin)){ ?>
+	<input type='hidden' name='txtceudula_supervisor' id='txtceudula_supervisor' value='<?php print $cedulaSuLogin; ?>'/> 
+	<?php print $_SESSION['full_name']; ?>
+<?php }else{ ?>
+	<select name='txtceudula_supervisor' disabled='disabled' id='txtceudula_supervisor' class='validate[required]'>
+	<option value=''>Seleccione</option>
+		<?php
+			print $objFunciones->crear_combo("tsupervisor","cedula","concat(nombres,' ',apellidos)",$lcCeudula_supervisor); 
+		?>
+	</select>
+<?php } ?>
+
+
+</td>
 <td align='right'><span class='rojo'>*</span> Turno:</td>
 <td><select name='txtturno' disabled='disabled' id='txtturno' class='validate[required]'>
 <option value=''>Seleccione</option>

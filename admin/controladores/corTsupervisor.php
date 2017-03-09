@@ -32,14 +32,14 @@ switch($lcOperacion){
 	
 		if($lobjTsupervisor->buscar()){
 			$lcCedula=$lobjTsupervisor->acCedula;
-$lcNacionalidad=$lobjTsupervisor->acNacionalidad;
-$lcNombres=$lobjTsupervisor->acNombres;
-$lcApellidos=$lobjTsupervisor->acApellidos;
-$lcDireccion=$lobjTsupervisor->acDireccion;
-$lcCodigo_area=$lobjTsupervisor->acCodigo_area;
-$lcTelefono=$lobjTsupervisor->acTelefono;
-$lcCodigo_dominio_correo=$lobjTsupervisor->acCodigo_dominio_correo;
-$lcEmail=$lobjTsupervisor->acEmail; 
+			$lcNacionalidad=$lobjTsupervisor->acNacionalidad;
+			$lcNombres=$lobjTsupervisor->acNombres;
+			$lcApellidos=$lobjTsupervisor->acApellidos;
+			$lcDireccion=$lobjTsupervisor->acDireccion;
+			$lcCodigo_area=$lobjTsupervisor->acCodigo_area;
+			$lcTelefono=$lobjTsupervisor->acTelefono;
+			$lcCodigo_dominio_correo=$lobjTsupervisor->acCodigo_dominio_correo;
+			$lcEmail=$lobjTsupervisor->acEmail; 
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;

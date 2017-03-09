@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("../modelos/clsTsalida.php");
 $lobjTsalida = new clsTsalida();
 
@@ -19,6 +20,8 @@ $bolcons = $_POST["bolcons"];
 $desperdicios = $_POST["desperdicios"];
 //fin detalles
 
+$arr = $lobjTsalida->essupervisor($_SESSION['full_name']);
+$cedulaSuLogin = $arr['cedula'];
 switch($lcOperacion){
 
 	case "incluir":
@@ -63,10 +66,10 @@ switch($lcOperacion){
 	
 		if($lobjTsalida->buscar()){
 			$lcNro_salida=$lobjTsalida->acNro_salida;
-$lcFecha_salida=$lobjTsalida->acFecha_salida;
-$lcCeudula_supervisor=$lobjTsalida->acCeudula_supervisor;
-$lcTurno=$lobjTsalida->acTurno; 
-$cadena = $lobjTsalida->listar_detalle();
+			$lcFecha_salida=$lobjTsalida->acFecha_salida;
+			$lcCeudula_supervisor=$lobjTsalida->acCeudula_supervisor;
+			$lcTurno=$lobjTsalida->acTurno; 
+			$cadena = $lobjTsalida->listar_detalle();
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;
